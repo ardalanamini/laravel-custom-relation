@@ -1,0 +1,27 @@
+{
+  "name": "ardalanamini/laravel-custom-relation",
+  "type": "library",
+  "description": "Create your own custom relation for when stock relations aren't enough",
+  "keywords": ["laravel", "eloquent", "relation", "custom", "relationship"],
+  "homepage": "https://github.com/ardalanamini/laravel-custom-relation",
+  "license": "MIT",
+  "authors": [{
+    "name": "Ardalan Amini",
+    "email": "ardalanamini22@gmail.com",
+    "homepage": "http://github.com/ardalanamini",
+    "role": "Developer"
+  }],
+  "autoload": {
+    "psr-4": {
+      "LaravelCustomRelation\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.0.0",
+    "laravel/framework": "5.5.*"
+  },
+  "repositories": [{
+    "type": "git",
+    "url": "https://github.com/ardalanamini/laravel-custom-relation.git"
+  }]
+}
