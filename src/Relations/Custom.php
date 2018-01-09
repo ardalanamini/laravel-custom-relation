@@ -39,7 +39,7 @@ class Custom extends Relation {
         Closure $eagerConstraints,
         array $eagerParentRelations = null,
         string $localKey = null,
-        string $foreignKey = null,
+        string $foreignKey = null
     ) {
         $this->baseConstraints = $baseConstraints;
         $this->eagerConstraints = $eagerConstraints;
