@@ -38,7 +38,8 @@ class Custom extends Relation {
         Closure $baseConstraints,
         Closure $eagerConstraints,
         array $eagerParentRelations = null,
-        string $localKey = null
+        string $localKey = null,
+        string $foreignKey = null,
     ) {
         $this->baseConstraints = $baseConstraints;
         $this->eagerConstraints = $eagerConstraints;
@@ -46,6 +47,7 @@ class Custom extends Relation {
         if ($eagerParentRelations != null) $parent->setEagerLoads($eagerParentRelations);
 
         $this->localKey = $localKey;
+        $this->foreignKey = $foreignKey;
 
         parent::__construct($query, $parent);
     }
@@ -118,7 +120,12 @@ class Custom extends Relation {
         // parents without having a possibly slow inner loops for every models.
         $dictionary = [];
 
-        foreach ($models as $model) $dictionary[$model->getKey()] = $results->where($this->localKey ?: $model->getKeyName(), $model->getKey())->all();
+        foreach ($models as $model) {
+            $dictionary[$model->getKey()] = $results->where(
+                $this->localKey ?: $model->getKeyName(),
+                $this->foreignKey ? $model->getAttribute($this->foreignKey) : $model->getKey()
+            )->all();
+        }
 
         return $dictionary;
     }

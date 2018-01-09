@@ -90,7 +90,12 @@ class User {
 
             // add eager constraints
             function ($relation, $models) {
-                $relation->getQuery()->whereIn('role_user.user_id', $relation->getKeys($models));
+                $relation->getQuery()->whereIn(
+                  'role_user.user_id',
+                  collect($models)->map(function ($value) {
+                      return $value->getKey();
+                  })->values()->unique()->sort()->all()
+               );
             }
         );
     }
@@ -125,7 +130,12 @@ class Permission {
 
             // eager constraints
             function ($relation, $models) {
-                $relation->getQuery()->whereIn('permission_role.permission_id', $relation->getKeys($models));
+                $relation->getQuery()->whereIn(
+                    'permission_role.permission_id',
+                    collect($models)->map(function ($value) {
+                        return $value->getKey();
+                    })->values()->unique()->sort()->all()
+                );
             }
         );
     }

@@ -32,11 +32,12 @@ trait HasCustomRelations {
         Closure $baseConstraints,
         Closure $eagerConstraints,
         array $eagerParentRelations = null,
-        string $localKey = null
+        string $localKey = null,
+        string $foreignKey = null
     ) {
         $instance = $this->newRelatedInstance($related);
         $query = $instance->newQuery();
 
-        return new Custom($query, $this, $baseConstraints, $eagerConstraints, $eagerParentRelations, $localKey);
+        return new Custom($query, $this, $baseConstraints, $eagerConstraints, $eagerParentRelations, $localKey, $foreignKey);
     }
 }
